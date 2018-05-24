@@ -1,8 +1,6 @@
-# linear regression from scratch
-import numpy as np
-
 import data
 import metrics
+import numpy as np
 
 class LinearRegression:
 	
@@ -60,28 +58,3 @@ class LinearRegression:
 		print("Your model's MSE: {}\nsklearn's MSE: {}".format(my_mse, skmse))
 		print()
 		print("Your model's R2 score: {}\nsklearn's R2 score: {}".format(my_r2, skr2))
-
-
-def main():
-	training_features, training_labels, test_features, test_labels = data.boston_split(0.87)	
-
-	solve_by = 'gdesc'
-	
-	from sklearn.preprocessing import StandardScaler
-	scaler = StandardScaler()
-	training_features = scaler.fit_transform(training_features)
-	test_features = scaler.transform(test_features)
-
-	model = LinearRegression(solve_by=solve_by)
-	model.train(training_features, training_labels)
-	predictions = model.predict(test_features)
-
-	mse = metrics.mean_squared_error(test_labels, predictions)
-	r2_score = metrics.r2_score(test_labels, predictions)
-
-	model.compare_sklearn(training_features, training_labels, test_features, test_labels, mse, r2_score)
-	
-if __name__ == '__main__':
-	main()
-
-
