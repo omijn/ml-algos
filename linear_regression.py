@@ -1,4 +1,4 @@
-import data
+from utils import data_transform
 import metrics
 import numpy as np
 
@@ -9,7 +9,7 @@ class LinearRegression:
 		self.regularized = regularized		
 
 	def train(self, features, labels):
-		X = data.insert_ones(features)
+		X = data_transform.insert_ones(features)
 		y = labels
 
 		if self.solve_by == 'ols':
@@ -39,7 +39,7 @@ class LinearRegression:
 		return weights
 
 	def predict(self, features):
-		X = data.insert_ones(features)
+		X = data_transform.insert_ones(features)
 		predictions = np.matmul(X, self.weights)
 		return predictions
 
