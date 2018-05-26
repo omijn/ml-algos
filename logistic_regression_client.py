@@ -53,3 +53,17 @@ X = np.delete(X, [0, 7, 10, 24, 34, 36, 39, 41], axis=1)
 
 # split into training and test data
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# scale features
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# logistic regression
+model = LogisticRegression()
+model.train(X_train, y_train)
+y_preds = model.predict(X_test)
+
+print("F1 score: {}".format(model.performance(y_test, y_preds)))
+print("sklearn F1 score: {}".format(model.sklearn_performance(X_train, X_test, y_train, y_test)))
